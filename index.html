@@ -35,7 +35,7 @@
 
         input {
             background-color: #1a1a1a; border: 1px solid #4a4a4a; color: #f5f5dc;
-            padding: 15px; width: 85%; margin-bottom: 10px; text-align: center; outline: none;
+            padding: 15px; width: 85%; margin-bottom: 10px; text-align: center; outline: none; font-family: 'Georgia', serif;
         }
 
         .btn-vintage {
@@ -58,22 +58,41 @@
         }
 
         /* DISEÑOS TARJETAS */
-        .marble-design { background: linear-gradient(135deg, #7c5c3e 0%, #4a341d 40%, #000000 100%); border: 2px solid rgba(255, 255, 255, 0.3); }
-        .storm-design { background: linear-gradient(180deg, #111111 0%, #333333 50%, #555555 100%); border: 1px solid #444; }
+        .leal-design { background: linear-gradient(135deg, #4b3621 0%, #2c1e12 100%); border: 2px solid #5d4037; }
+        .fidelidad-design { background: linear-gradient(180deg, #444 0%, #000 100%); border: 1px solid #555; }
+        .exclusive-design { 
+            background: #2a1a0f; 
+            background-image: linear-gradient(to right, rgba(42, 26, 15, 0.4) 60%, #e8dcc4 100%), url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            border: 1px solid #3d2b1f;
+        }
         .special-design-points { background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); border: 4px double #d4af37; outline: 1px solid #d4af37; outline-offset: -12px; }
         .product-design { background: linear-gradient(135deg, #4d4d4d 0%, #1a1a1a 100%); border: 2px solid #999; }
 
-        /* SELLOS Y BRILLOS */
+        .frase-tarjeta { font-style: italic; font-size: 0.9rem; margin-bottom: 25px; display: block; color: #ccc; }
+        .frase-blanca { color: #ffffff !important; font-weight: bold; }
+
+        /* ETIQUETAS DE PRECIO */
+        .acceso-precio {
+            margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1);
+            border: 1px dashed #d4af37; color: #f5f5dc; font-weight: bold;
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+        }
+
+        /* SELLOS E ICONOS */
         .icono-circulo { width: 42px; height: 42px; border: 2px solid #ffffff; border-radius: 50%; cursor: pointer; transition: 0.4s; flex-shrink: 0; }
-        .icono-circulo.marcado { background: #ffffff !important; box-shadow: 0 0 20px #fff, 0 0 40px #fff !important; display: flex; justify-content: center; align-items: center; }
+        .icono-circulo.marcado { background: #ffffff !important; box-shadow: 0 0 20px #fff; display: flex; justify-content: center; align-items: center; }
         .icono-circulo.marcado::after { content: "✂"; color: #000; font-size: 1.2rem; }
 
         .icono-base-storm { width: 60px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.4s; flex-shrink: 0; }
-        .icono-base-storm svg { width: 100%; height: 100%; fill: transparent; stroke: #d4af37; stroke-width: 1.5; transition: 0.4s; }
-        .marcado-storm svg { fill: #d4af37 !important; filter: drop-shadow(0 0 15px #d4af37) !important; stroke: #fff !important; }
+        .icono-base-storm svg { width: 100%; height: 100%; fill: transparent; stroke: #d4af37; stroke-width: 1.5; }
+        .marcado-storm svg { fill: #d4af37 !important; filter: drop-shadow(0 0 15px #d4af37); stroke: #fff !important; }
+
+        .icono-exclusive-storm { width: 65px; height: 55px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.4s; flex-shrink: 0; }
+        .icono-exclusive-storm svg { width: 100%; height: 100%; fill: transparent; stroke: #e8dcc4; stroke-width: 1.2; }
+        .marcado-exclusive svg { fill: #f5f5dc !important; filter: drop-shadow(0 0 12px #f5f5dc); stroke: #3d2b1f !important; }
 
         .icono-producto { width: 45px; height: 45px; border: 1px dashed #ccc; border-radius: 8px; cursor: pointer; transition: 0.4s; }
-        .icono-producto.marcado-prod { background: #f5f5dc !important; border-style: solid; box-shadow: 0 0 20px #f5f5dc !important; display: flex; justify-content: center; align-items: center; }
+        .icono-producto.marcado-prod { background: #f5f5dc !important; box-shadow: 0 0 20px #f5f5dc; display: flex; justify-content: center; align-items: center; }
         .icono-producto.marcado-prod::after { content: "✔"; color: #000; font-weight: bold; }
 
         .contenedor-filas { display: flex; flex-direction: column; gap: 20px; align-items: center; margin: 20px 0; }
@@ -101,8 +120,8 @@
         <div id="registro">
             <input type="text" id="nombre" placeholder="NOMBRE">
             <input type="text" id="apellido" placeholder="APELLIDO">
-            <input type="email" id="correo" placeholder="CORREO (OPCIONAL)">
-            <p style="font-size: 0.7rem; color: #b0b0b0; margin-bottom: 20px;">Recibirás notificaciones de tus promos</p>
+            <input type="text" id="whatsapp-registro" placeholder="WHATSAPP">
+            <p style="font-size: 0.7rem; color: #b0b0b0; margin-bottom: 20px;">Diferenciamos tu tarjeta por tu número</p>
             <button class="btn-vintage" onclick="entrar()">VER PROMOS</button>
         </div>
 
@@ -110,118 +129,171 @@
             <p id="saludo" style="margin-bottom: 20px; font-weight: bold; color: #f5f5dc; text-transform: uppercase;"></p>
             <div class="promo-card" onclick="abrirModal('modal-leal')">TARJETA LEAL</div>
             <div class="promo-card" onclick="abrirModal('modal-fidelidad')">TARJETA FIDELIDAD</div>
+            <div class="promo-card" onclick="abrirModal('modal-exclusiva')" style="background:#2a1a0f; color:#e8dcc4;">LEALTAD EXCLUSIVA</div>
             <div class="promo-card" onclick="abrirModal('modal-special')" style="border-left-color: #d4af37;">PROMOS ESPECIALES</div>
             <div class="promo-card" onclick="abrirModal('modal-productos')" style="border-left-color: #999;">TARJETA DE PRODUCTOS</div>
             <button class="btn-vintage" style="font-size: 0.7rem; margin-top: 15px;" onclick="abrirModal('modal-logout')">CERRAR SESIÓN</button>
         </div>
     </div>
 
-    <div id="modal-leal" class="modal">
-        <div class="tarjeta-base marble-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:20px;">TARJETA LEAL</div><div class="contenedor-filas" id="filas-leal"></div><div class="divisor"></div><div id="footer-leal" class="info-footer"></div></div>
-    </div>
+    <div id="modal-leal" class="modal"><div class="tarjeta-base leal-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px;">TARJETA LEAL</div><span class="frase-tarjeta">"Tu lealtad define tu estilo"</span><div class="contenedor-filas" id="filas-leal"></div><div class="divisor"></div><div class="info-footer contacto-gen"></div></div></div>
+    
     <div id="modal-fidelidad" class="modal">
-        <div class="tarjeta-base storm-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:20px; color:#d4af37;">TARJETA FIDELIDAD</div><div class="contenedor-filas" id="filas-fidelidad"></div><div class="divisor"></div><div id="footer-fidelidad" class="info-footer"></div></div>
+        <div class="tarjeta-base fidelidad-design">
+            <span class="cerrar-btn" onclick="cerrar()">×</span>
+            <div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px; color:#d4af37;">TARJETA FIDELIDAD</div>
+            <span class="frase-tarjeta">"El compromiso con la excelencia"</span>
+            <div class="contenedor-filas" id="filas-fidelidad"></div>
+            <div class="acceso-precio">S/1 cada 35 días</div>
+            <div class="divisor"></div>
+            <div class="info-footer contacto-gen"></div>
+        </div>
     </div>
+    
+    <div id="modal-exclusiva" class="modal">
+        <div class="tarjeta-base exclusive-design">
+            <span class="cerrar-btn" onclick="cerrar()">×</span>
+            <div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px; color:#d4af37; font-size: 1.5rem;">LEALTAD EXCLUSIVA</div>
+            <span class="frase-tarjeta frase-blanca">"Distinción absoluta en cada detalle"</span>
+            <div class="contenedor-filas" id="filas-exclusiva"></div>
+            <div class="acceso-precio" style="border-color:#e8dcc4; color:#fff;">S/2.50 cada 35 días</div>
+            <div class="divisor" style="background:rgba(255,255,255,0.2);"></div>
+            <div class="info-footer contacto-gen" style="color:#ffffff;"></div>
+        </div>
+    </div>
+
     <div id="modal-special" class="modal">
-        <div class="tarjeta-base special-design-points"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px; color:#d4af37;">PROMOS ESPECIALES</div><div class="puntos-display">TOTAL: 30 PTS</div><p style="color:#d4af37; font-weight:bold;">ACUMULADOS: <span id="puntos-val">0</span></p><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 90%; margin: 20px auto; text-align: left;"><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #666; border-radius: 4px; opacity: 0.7;"><span>CORTE DE CABELLO</span><br><b style="color:#d4af37">VALE 25 PTS</b></div><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(15, 'Traer un Amigo')"><span>TRAER UN AMIGO</span><br><b style="color:#d4af37">+15 PTS</b></div><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(15, 'Visita 15 días')"><span>CADA 15 DÍAS</span><br><b style="color:#d4af37">+15 PTS</b></div><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(20, 'Comprar Productos')"><span>COMPRAR PRODUCTOS</span><br><b style="color:#d4af37">+20 PTS</b></div></div><div style="background:#d4af37; color:#000; padding:10px; font-weight:bold; text-transform:uppercase; font-size:0.75rem;">CORTE A S/1 (MARTES-JUEVES-SÁBADOS) AL LLEGAR A 30 PTS</div><div class="divisor"></div><div id="footer-special" class="info-footer"></div></div>
+        <div class="tarjeta-base special-design-points">
+            <span class="cerrar-btn" onclick="cerrar()">×</span>
+            <div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px; color:#d4af37;">PROMOS ESPECIALES</div>
+            <span class="frase-tarjeta">"Suma puntos y domina la tormenta"</span>
+            <div class="puntos-display">TOTAL: 30 PTS</div>
+            <p style="color:#d4af37; font-weight:bold;">ACUMULADOS: <span id="puntos-val">0</span></p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 90%; margin: 20px auto; text-align: left;">
+                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(15, 'Traer un Amigo')"><span>TRAER UN AMIGO</span><br><b style="color:#d4af37">+15 PTS</b></div>
+                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(15, 'Visita 15 días')"><span>CADA 15 DÍAS</span><br><b style="color:#d4af37">+15 PTS</b></div>
+                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(20, 'Comprar Productos')"><span>COMPRAR PRODUCTOS</span><br><b style="color:#d4af37">+20 PTS</b></div>
+            </div>
+            <div style="background:#d4af37; color:#000; padding:10px; font-weight:bold; text-transform:uppercase; font-size:0.75rem;">CORTE A S/1 AL LLEGAR A 30 PTS</div>
+            <div class="divisor"></div>
+            <div class="info-footer contacto-gen"></div>
+        </div>
     </div>
-    <div id="modal-productos" class="modal">
-        <div class="tarjeta-base product-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:20px;">CLUB DE PRODUCTOS</div><div class="contenedor-filas" id="filas-productos"></div><div style="font-size: 0.75rem; color: #fff; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 6px; margin-top: 15px; border: 1px solid #999;"><b>PROMO CLUB:</b> POR CADA 3 PRODUCTOS EL 4TO AL 50% DSCTO Y EL 5TO A SOLO S/3 C/U</div><div class="divisor"></div><div id="footer-productos" class="info-footer"></div></div>
-    </div>
+
+    <div id="modal-productos" class="modal"><div class="tarjeta-base product-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px;">CLUB DE PRODUCTOS</div><span class="frase-tarjeta">"Mantén el look en casa"</span><div class="contenedor-filas" id="filas-productos"></div><div style="font-size: 0.75rem; color: #fff; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 6px; margin-top: 15px; border: 1px solid #999;"><b>PROMO CLUB:</b> POR CADA 3 PRODUCTOS EL 4TO AL 50% DSCTO Y EL 5TO A SOLO S/3</div><div class="divisor"></div><div class="info-footer contacto-gen"></div></div></div>
 
     <div id="modal-logout" class="modal" style="align-items: center;">
         <div class="modal-salida-contenido">
-            <h3 style="color:#f5f5dc; margin-bottom:20px;">DÉJANOS TU NÚMERO PARA ENVIARTE TUS PROMOS</h3>
-            <input type="number" id="telefono-promo" placeholder="TU WHATSAPP" style="width: 90%;">
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-                <button class="btn-vintage" style="padding: 10px 20px; font-size: 0.7rem; background:#25d366; color:#fff; border-color:#25d366;" onclick="enviarWhatsApp()">ENVIAR</button>
-                <button class="btn-vintage" style="padding: 10px 20px; font-size: 0.7rem; background:transparent; color:#fff;" onclick="finalizarCierre()">MÁS TARDE</button>
+            <h3 style="color:#f5f5dc; margin-bottom:20px;">¿TERMINAMOS POR HOY?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                <button class="btn-vintage" style="background:#4285F4; color:#fff; border-color:#4285F4; font-size: 0.65rem;" onclick="agendarEnCalendario()">AGENDAR RECORDATORIO (31 DÍAS)</button>
+                <button class="btn-vintage" style="background:transparent; color:#fff;" onclick="finalizarCierre()">SALIR</button>
             </div>
         </div>
     </div>
 
     <script>
+        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbzms_f-v9q8HQJQOH7dBbaznJJn6SyAQCltg7gz2HhYWp2QMyFn_c5UGi2z5Yu2wHrI/exec"; 
         const PIN = "storm05.z";
-        const PROMOS = ["50% DESC. CORTES (FADES - DEGRADADOS)", "REGALO DE 1 PRODUCTO PARA EL CABELLO O PIEL", "30% DESCUENTO DE C/U TIPO DE CORTE + PRODUCTO"];
-        const FRASES_LEAL = ["\"Hoy se hace como en tu foto de perfil o mejor\"", "\"El estilo es la única tormenta que no quieres evitar\""];
-        const FRASES_FIDELIDAD = ["\"No es solo un corte, es tu nueva marca personal\"", "\"Donde la precisión se encuentra con la tormenta\""];
-        const CONTACTO = `<p><strong>Dirección:</strong> Av. Manco Cápac 469, Tablada de Lurín</p><p><strong>Contacto:</strong> 963031759 | <strong>Horario:</strong> Mar-Dom 10AM-8PM</p><p style="font-weight:bold; color:#f5f5dc;">Lunes atención con reserva fija</p>`;
+        let CLIENTE_ID = ""; 
+
+        const PROMOS_LEAL = ["50% DESC. CORTES (FADES - DEGRADADOS)", "REGALO DE 1 PRODUCTO PARA EL CABELLO O PIEL", "30% DESCUENTO DE C/U TIPO DE CORTE + PRODUCTO"];
+        // CAMBIO SOLICITADO
+        const PROMOS_FIDELIDAD = ["50% de DSCT en cortes (fades-degradados)+ bebida de cortesía", "REGALO DE 1 PRODUCTO PARA EL CABELLO O PIEL", "CORTE GRATIS + PERFUME"];
+        const PROMOS_EXCLUSIVA = ["60% EN CORTES + BEBIDA", "CORTE GRATIS", "50% DSCT + PERFUME + PRODUCTO DE CABELLO"];
+        const CONTACTO = `<p><strong>Dirección:</strong> Av. Manco Cápac 469, Tablada de Lurín</p><p>963031759 | Mar-Dom 10AM-8PM | Lunes reserva fija</p>`;
+        
         const SVG_NUBE = `<svg viewBox="0 0 24 24"><path d="M17.5,19c0.4,0,0.8-0.1,1.1-0.3c1.4-0.8,1.9-2.6,1.1-4c-0.1-0.2-0.2-0.3-0.3-0.5C19.7,11,17.4,9,14.5,9c-0.4,0-0.8,0-1.2,0.1 C12.4,7.2,10.3,6,8,6C4.7,6,2,8.7,2,12c0,0.6,0.1,1.2,0.3,1.7c0.6,1.8,2.3,3.1,4.3,3.3l0.4,0h2.5l-1,3h2.5l1.5-4h-2l1-3h-2.5l1.5-4l-1,3" /></svg>`;
+        const SVG_EXCLUSIVE = `<svg viewBox="0 0 64 64"><path d="M48,32c0.4,0,0.8,0,1.2,0.1C55.4,32.7,60,38.1,60,44.5c0,6.9-5.6,12.5-12.5,12.5H16.5c-6.9,0-12.5-5.6-12.5-12.5 c0-6.1,4.4-11.2,10.2-12.3c0.8-5.7,5.7-10.2,11.8-10.2c2.2,0,4.2,0.6,5.9,1.6C34.2,18.4,39.7,15,46,15c8.3,0,15,6.7,15,15 c0,0.7-0.1,1.3-0.2,2H48z M35,42l-4,10h5l-2,8 M25,42l-4,10h5l-2,8 M45,42l-4,10h5l-2,8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
         function entrar() {
-            if(!document.getElementById('nombre').value) return alert("Ingresa tu nombre");
+            const nom = document.getElementById('nombre').value;
+            const ape = document.getElementById('apellido').value;
+            const tel = document.getElementById('whatsapp-registro').value;
+            if(!nom || !tel) return alert("Completa al menos Nombre y WhatsApp");
+            CLIENTE_ID = tel.trim();
             document.getElementById('registro').classList.add('hidden');
             document.getElementById('menu-promos').classList.remove('hidden');
-            document.getElementById('saludo').innerText = "HOLA, " + document.getElementById('nombre').value;
+            document.getElementById('saludo').innerText = "HOLA, " + nom.toUpperCase();
             renderTodo();
+            try { fetch(URL_DATABASE, { method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: nom, apellido: ape, whatsapp: tel}) }); } catch(e) {}
         }
 
         function renderTodo() {
-            const leal = document.getElementById('filas-leal');
-            const fidelidad = document.getElementById('filas-fidelidad');
-            const productos = document.getElementById('filas-productos');
-            leal.innerHTML = fidelidad.innerHTML = "";
-            PROMOS.forEach((texto, i) => {
-                let iconsL = "", iconsF = "";
-                for(let j=0; j<4; j++) {
-                    let idL = `l-${i}-${j}`, idF = `f-${i}-${j}`;
-                    iconsL += `<div class="icono-circulo ${localStorage.getItem(idL)==='true'?'marcado':''}" onclick="marcarSello('${idL}',this,'marcado')"></div>`;
-                    iconsF += `<div class="icono-base-storm ${localStorage.getItem(idF)==='true'?'marcado-storm':''}" onclick="marcarSello('${idF}',this,'marcado-storm')">${SVG_NUBE}</div>`;
-                }
-                leal.innerHTML += `<div class="fila-promo"><div class="grupo-iconos">${iconsL}</div><div class="texto-promo">${texto}</div></div>`;
-                fidelidad.innerHTML += `<div class="fila-promo"><div class="grupo-iconos">${iconsF}</div><div class="texto-promo">${texto}</div></div>`;
-            });
+            renderTarjetas('filas-leal', PROMOS_LEAL, 'l', 'circulo');
+            renderTarjetas('filas-fidelidad', PROMOS_FIDELIDAD, 'f', 'storm');
+            renderTarjetas('filas-exclusiva', PROMOS_EXCLUSIVA, 'e', 'exclusive');
             let iconsP = "";
             for(let k=0; k<5; k++) {
                 let idPr = `prod-${k}`;
-                iconsP += `<div class="icono-producto ${localStorage.getItem(idPr)==='true'?'marcado-prod':''}" onclick="marcarSello('${idPr}',this,'marcado-prod')"></div>`;
+                let key = CLIENTE_ID + "-" + idPr;
+                iconsP += `<div class="icono-producto ${localStorage.getItem(key)==='true'?'marcado-prod':''}" onclick="marcarSello('${idPr}',this,'marcado-prod')"></div>`;
             }
-            productos.innerHTML = `<div class="fila-promo"><div class="grupo-iconos">${iconsP}</div><div class="texto-promo">Lealtad en Productos</div></div>`;
-            document.getElementById('footer-leal').innerHTML = FRASES_LEAL.map(f => `<div class="frase-item">${f}</div>`).join('') + CONTACTO;
-            document.getElementById('footer-fidelidad').innerHTML = FRASES_FIDELIDAD.map(f => `<div class="frase-item">${f}</div>`).join('') + CONTACTO;
-            document.getElementById('footer-special').innerHTML = CONTACTO;
-            document.getElementById('footer-productos').innerHTML = CONTACTO;
+            document.getElementById('filas-productos').innerHTML = `<div class="fila-promo"><div class="grupo-iconos">${iconsP}</div><div class="texto-promo">Compra de Productos</div></div>`;
+            document.querySelectorAll('.contacto-gen').forEach(div => div.innerHTML = CONTACTO);
             actualizarDisplayPuntos();
+        }
+
+        function renderTarjetas(contenedorId, lista, prefijo, tipoIcono) {
+            const cont = document.getElementById(contenedorId);
+            cont.innerHTML = "";
+            lista.forEach((texto, i) => {
+                let icons = "";
+                for(let j=0; j<4; j++) {
+                    let id = `${prefijo}-${i}-${j}`;
+                    let key = CLIENTE_ID + "-" + id; 
+                    let isM = localStorage.getItem(key)==='true';
+                    if(tipoIcono === 'circulo') icons += `<div class="icono-circulo ${isM?'marcado':''}" onclick="marcarSello('${id}',this,'marcado')"></div>`;
+                    else if (tipoIcono === 'exclusive') icons += `<div class="icono-exclusive-storm ${isM?'marcado-exclusive':''}" onclick="marcarSello('${id}',this,'marcado-exclusive')">${SVG_EXCLUSIVE}</div>`;
+                    else icons += `<div class="icono-base-storm ${isM?'marcado-storm':''}" onclick="marcarSello('${id}',this,'marcado-storm')">${SVG_NUBE}</div>`;
+                }
+                cont.innerHTML += `<div class="fila-promo"><div class="grupo-iconos">${icons}</div><div class="texto-promo">${texto}</div></div>`;
+            });
         }
 
         function marcarSello(id, el, cl) {
             if(prompt("PIN ADMIN:") === PIN) {
+                const key = CLIENTE_ID + "-" + id;
                 const val = !el.classList.contains(cl);
                 if(val) el.classList.add(cl); else el.classList.remove(cl);
-                localStorage.setItem(id, val);
+                localStorage.setItem(key, val);
             }
         }
 
         function sumarPuntosEspeciales(cant, motivo) {
             if(prompt(`Validar ${motivo}. PIN ADMIN:`) === PIN) {
-                let p = parseInt(localStorage.getItem('puntos_storm_acum') || 0) + cant;
-                localStorage.setItem('puntos_storm_acum', p);
+                let key = CLIENTE_ID + "-pts";
+                let pActual = parseInt(localStorage.getItem(key) || 0);
+                let pNuevo = (pActual >= 30) ? cant : Math.min(pActual + cant, 30);
+                localStorage.setItem(key, pNuevo);
                 actualizarDisplayPuntos();
             }
         }
 
-        function actualizarDisplayPuntos() { document.getElementById('puntos-val').innerText = localStorage.getItem('puntos_storm_acum') || 0; }
+        function actualizarDisplayPuntos() { 
+            let key = CLIENTE_ID + "-pts";
+            const el = document.getElementById('puntos-val');
+            if(el) el.innerText = localStorage.getItem(key) || 0; 
+        }
+
+        function agendarEnCalendario() {
+            const fechaCorte = new Date();
+            fechaCorte.setDate(fechaCorte.getDate() + 31);
+            const iso = fechaCorte.toISOString().replace(/-|:|\.\d+/g, "");
+            window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=Style+Storm%3A+Toca+corte+bro&dates=${iso}/${iso}&details=%C2%BFEs+hora+de+un+corte+no+bro%3F&location=Av.+Manco+C%C3%A1pac+469`, '_blank');
+        }
+
         function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
         function cerrar() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
         
-        // CORRECCIÓN: Función para regresar al inicio (Registro)
         function finalizarCierre() { 
-            cerrar(); // Cierra el modal
-            document.getElementById('menu-promos').classList.add('hidden'); // Oculta el menú
-            document.getElementById('registro').classList.remove('hidden'); // Muestra el registro (Inicio)
-            // Opcional: Limpiar los campos para un nuevo usuario
+            CLIENTE_ID = "";
             document.getElementById('nombre').value = "";
             document.getElementById('apellido').value = "";
-            document.getElementById('correo').value = "";
-            document.getElementById('telefono-promo').value = "";
-        }
-
-        function enviarWhatsApp() {
-            const numCliente = document.getElementById('telefono-promo').value;
-            if(!numCliente) return alert("Por favor ingresa un número.");
-            const mensaje = encodeURIComponent(`Hola Alessandro storm, aquí dejo mi número para recibir promociones: ${numCliente}`);
-            window.open(`https://wa.me/51963031759?text=${mensaje}`, '_blank');
-            finalizarCierre();
+            document.getElementById('whatsapp-registro').value = "";
+            cerrar();
+            document.getElementById('menu-promos').classList.add('hidden');
+            document.getElementById('registro').classList.remove('hidden');
         }
     </script>
 </body>
