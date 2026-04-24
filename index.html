@@ -71,7 +71,6 @@
         .frase-tarjeta { font-style: italic; font-size: 0.9rem; margin-bottom: 25px; display: block; color: #ccc; }
         .frase-blanca { color: #ffffff !important; font-weight: bold; }
 
-        /* SELLOS E ICONOS */
         .icono-circulo { width: 42px; height: 42px; border: 2px solid #ffffff; border-radius: 50%; cursor: pointer; transition: 0.4s; flex-shrink: 0; }
         .icono-circulo.marcado { background: #ffffff !important; box-shadow: 0 0 20px #fff; display: flex; justify-content: center; align-items: center; }
         .icono-circulo.marcado::after { content: "✂"; color: #000; font-size: 1.2rem; }
@@ -134,8 +133,8 @@
     <div id="modal-productos" class="modal"><div class="tarjeta-base product-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px;">CLUB DE PRODUCTOS</div><span class="frase-tarjeta">"Mantén el look en casa"</span><div class="contenedor-filas" id="filas-productos"></div><div class="divisor"></div><div class="info-footer contacto-gen"></div></div></div>
 
     <script>
-        // URL UNIFICADA
-        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbzms_f-v9q8HQJQOH7dBbaznJJn6SyAQCltg7gz2HhYWp2QMyFn_c5UGi2z5Yu2wHrI/exec"; 
+        // URL ACTUALIZADA
+        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbxk5QMt6MnVx-8EzQ4hg-QLngt6HUfumvNC0WNXWJcOPRy8mZ6MhSvj4owlWV4AFTrKBQ/exec"; 
         const PIN = "storm05.z";
         let CLIENTE_ID = ""; 
 
@@ -160,7 +159,6 @@
             document.getElementById('saludo').innerText = "HOLA, " + nom.toUpperCase();
             renderTodo();
 
-            // ENVÍO A GOOGLE SHEETS CORREGIDO
             const formData = new FormData();
             formData.append('nombre', nom);
             formData.append('apellido', ape);
