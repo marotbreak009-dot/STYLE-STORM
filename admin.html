@@ -136,8 +136,8 @@
     </div>
 
     <script>
-        // URL UNIFICADA CON INDEX.HTML
-        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbzms_f-v9q8HQJQOH7dBbaznJJn6SyAQCltg7gz2HhYWp2QMyFn_c5UGi2z5Yu2wHrI/exec";
+        // NUEVA URL QUE ME PASASTE
+        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbxk5QMt6MnVx-8EzQ4hg-QLngt6HUfumvNC0WNXWJcOPRy8mZ6MhSvj4owlWV4AFTrKBQ/exec";
         
         const PIN_ACCESO = "storm05.z"; 
 
@@ -167,6 +167,7 @@
                 status.innerText = "Base de datos al día.";
             } catch (error) {
                 status.innerText = "Error de conexión.";
+                console.error(error);
             }
         }
 
