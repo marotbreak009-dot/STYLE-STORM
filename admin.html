@@ -5,204 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Style Storm - Panel de Control</title>
     <style>
-        body { 
-            background: radial-gradient(circle, #2c2c2c 0%, #121212 100%); 
-            color: #f5f5dc; 
-            font-family: 'Georgia', serif; 
-            padding: 40px 20px; 
-            text-align: center; 
-            margin: 0;
-        }
-
-        .contenedor-admin {
-            max-width: 1000px;
-            margin: auto;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border: 1px solid #4a4a4a;
-            outline: 4px double #5a5a5a;
-            outline-offset: -12px;
-            border-radius: 5px;
-        }
-
+        body { background: radial-gradient(circle, #2c2c2c 0%, #121212 100%); color: #f5f5dc; font-family: 'Georgia', serif; padding: 40px 20px; text-align: center; margin: 0; }
+        .contenedor-admin { max-width: 1000px; margin: auto; background: rgba(0, 0, 0, 0.8); padding: 30px; border: 1px solid #4a4a4a; outline: 4px double #5a5a5a; outline-offset: -12px; border-radius: 5px; }
         h1 { letter-spacing: 6px; text-transform: uppercase; color: #d4af37; margin-bottom: 25px; }
-
-        table { 
-            width: 100%; 
-            margin-top: 20px; 
-            border-collapse: collapse; 
-            background: #1a1a1a;
-        }
-
-        th, td { 
-            border: 1px solid #4a4a4a !important; 
-            padding: 15px; 
-            text-align: left; 
-        }
-
-        th { 
-            background-color: #d4af37; 
-            color: #000; 
-            text-transform: uppercase; 
-            font-weight: bold;
-        }
-
-        .btn-actualizar {
-            background: transparent;
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 10px 20px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; background: #1a1a1a; }
+        th, td { border: 1px solid #4a4a4a !important; padding: 15px; text-align: left; }
+        th { background-color: #d4af37; color: #000; text-transform: uppercase; font-weight: bold; }
+        .btn-actualizar { background: transparent; color: #d4af37; border: 2px solid #d4af37; padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; margin-bottom: 20px; }
         .btn-actualizar:hover { background: #d4af37; color: #000; }
-
-        .btn-tarjeta {
-            background: #d4af37;
-            color: #000;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-        }
-
+        .btn-tarjeta { background: #d4af37; color: #000; border: none; padding: 8px 12px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; }
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
         .modal-content { background: #1a1a1a; margin: 10% auto; padding: 25px; width: 85%; max-width: 400px; border: 2px solid #d4af37; border-radius: 10px; }
-        
         .grid-puntos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 25px 0; }
-        
-        .punto { 
-            width: 50px; 
-            height: 50px; 
-            border: 2px dashed #4a4a4a; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            cursor: pointer; 
-            font-weight: bold;
-            color: #4a4a4a;
-            transition: 0.3s;
-        }
-
-        .punto.marcado { 
-            background: #d4af37; 
-            color: #000; 
-            border: 2px solid #000;
-            border-style: solid; 
-        }
-
+        .punto { width: 50px; height: 50px; border: 2px dashed #4a4a4a; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; color: #4a4a4a; transition: 0.3s; }
+        .punto.marcado { background: #d4af37; color: #000; border: 2px solid #000; }
         .btn-cerrar { background: #444; color: #fff; border: none; padding: 12px; width: 100%; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
-
     <div class="contenedor-admin">
         <h1>SISTEMA DE GESTIÓN</h1>
-        
         <button class="btn-actualizar" onclick="cargarClientes()">Actualizar Lista de Clientes</button>
         <p id="status" style="color: #d4af37; font-size: 0.9rem;">Esperando conexión...</p>
-
         <table>
-            <thead>
-                <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>WhatsApp</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="cuerpo-tabla">
-                <tr>
-                    <td colspan="3" style="text-align: center; color: #666; padding: 30px;">
-                        Presiona "Actualizar Lista" para cargar los datos.
-                    </td>
-                </tr>
-            </tbody>
+            <thead><tr><th>Nombre y Apellido</th><th>WhatsApp</th><th>Acciones</th></tr></thead>
+            <tbody id="cuerpo-tabla"><tr><td colspan="3" style="text-align: center; color: #666; padding: 30px;">Presiona "Actualizar Lista".</td></tr></tbody>
         </table>
     </div>
-
     <div id="miModal" class="modal">
         <div class="modal-content">
             <h2 id="nombre-cliente" style="color:#d4af37; margin-top:0; letter-spacing: 2px;">TARJETA</h2>
-            <p style="font-size: 0.8rem; color: #888;">Toca un círculo para marcar el corte (Usa tu PIN)</p>
             <div class="grid-puntos" id="grid-puntos"></div>
             <button class="btn-cerrar" onclick="cerrarModal()">VOLVER AL PANEL</button>
         </div>
     </div>
-
     <script>
-        // NUEVA URL QUE ME PASASTE
-        const URL_DATABASE = "https://script.google.com/macros/s/AKfycbxk5QMt6MnVx-8EzQ4hg-QLngt6HUfumvNC0WNXWJcOPRy8mZ6MhSvj4owlWV4AFTrKBQ/exec";
-        
+        const URL_DATABASE = "https://script.google.com/macros/s/AKfycblyhZwtCD9-wagqZGJUrwAZTVaPFcPCmdnmDZtEIoLP0Ux-vU1zmk6_YrOJdVZ2T80Q/exec";
         const PIN_ACCESO = "storm05.z"; 
-
         async function cargarClientes() {
             const tabla = document.getElementById('cuerpo-tabla');
             const status = document.getElementById('status');
             status.innerText = "Sincronizando...";
-
             try {
                 const respuesta = await fetch(URL_DATABASE);
                 const datos = await respuesta.json();
                 tabla.innerHTML = "";
-
-                if (datos.length === 0) {
-                    tabla.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Sin registros.</td></tr>";
-                } else {
+                if (datos.length === 0) { tabla.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Sin registros.</td></tr>"; } 
+                else {
                     datos.reverse().forEach(cliente => {
                         const fila = document.createElement('tr');
-                        fila.innerHTML = `
-                            <td>${cliente.nombre} ${cliente.apellido}</td>
-                            <td>${cliente.whatsapp}</td>
-                            <td><button class="btn-tarjeta" onclick="verTarjeta('${cliente.whatsapp}', '${cliente.nombre} ${cliente.apellido}')">VER TARJETA</button></td>
-                        `;
+                        fila.innerHTML = `<td>${cliente.nombre} ${cliente.apellido}</td><td>${cliente.whatsapp}</td><td><button class="btn-tarjeta" onclick="verTarjeta('${cliente.whatsapp}', '${cliente.nombre} ${cliente.apellido}')">VER TARJETA</button></td>`;
                         tabla.appendChild(fila);
                     });
                 }
                 status.innerText = "Base de datos al día.";
-            } catch (error) {
-                status.innerText = "Error de conexión.";
-                console.error(error);
-            }
+            } catch (error) { status.innerText = "Error de conexión."; }
         }
-
         function verTarjeta(id, nombreCompleto) {
             document.getElementById('nombre-cliente').innerText = nombreCompleto;
             const grid = document.getElementById('grid-puntos');
             grid.innerHTML = "";
-            
-            let puntosGuardados = parseInt(localStorage.getItem('puntos_' + id)) || 0;
-
+            let puntos = parseInt(localStorage.getItem('puntos_' + id)) || 0;
             for (let i = 1; i <= 10; i++) {
                 const punto = document.createElement('div');
                 punto.classList.add('punto');
-                if (i <= puntosGuardados) punto.classList.add('marcado');
+                if (i <= puntos) punto.classList.add('marcado');
                 punto.innerText = i;
-
                 punto.onclick = function() {
-                    const pass = prompt("Introduce el PIN de Barbero:");
-                    
-                    if (pass === PIN_ACCESO) {
-                        if (this.classList.contains('marcado')) {
-                            localStorage.setItem('puntos_' + id, i - 1);
-                        } else {
-                            localStorage.setItem('puntos_' + id, i);
-                        }
+                    if (prompt("PIN de Barbero:") === PIN_ACCESO) {
+                        let nP = this.classList.contains('marcado') ? i - 1 : i;
+                        localStorage.setItem('puntos_' + id, nP);
                         verTarjeta(id, nombreCompleto);
-                    } else if (pass !== null) {
-                        alert("PIN Incorrecto.");
                     }
                 };
                 grid.appendChild(punto);
             }
             document.getElementById('miModal').style.display = "block";
         }
-
         function cerrarModal() { document.getElementById('miModal').style.display = "none"; }
     </script>
 </body>
