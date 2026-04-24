@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Storm - Luxury System</title>
+    <style>
+        /* BASE GENERAL */
+        body {
+            background: radial-gradient(circle, #5a5a5a 0%, #2c2c2c 50%, #121212 100%);
+            color: #d1d1d1;
+            font-family: 'Georgia', serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0;
+        }
+
+        .contenedor-principal {
+            background: linear-gradient(145deg, #1f1f1f, #2a2a2a);
+            padding: 50px 40px; border: 1px solid #4a4a4a;
+            outline: 4px double #5a5a5a; outline-offset: -15px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6); text-align: center;
+            width: 420px; border-radius: 5px;
+        }
+
+        h1 { color: #f5f5dc; font-size: 2.8rem; text-transform: uppercase; letter-spacing: 4px; margin: 0; }
+        .eslogan { color: #b0b0b0; font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
+
+        .promo-card {
+            background: #1a1a1a; border-left: 4px solid #f5f5dc;
+            margin-bottom: 12px; padding: 15px 20px; text-align: left;
+            cursor: pointer; transition: 0.3s ease; text-transform: uppercase;
+            font-weight: bold; letter-spacing: 1px; font-size: 0.85rem;
+        }
+        .promo-card:hover { transform: scale(1.02); background: #222; }
+
+        input {
+            background-color: #1a1a1a; border: 1px solid #4a4a4a; color: #f5f5dc;
+            padding: 15px; width: 85%; margin-bottom: 10px; text-align: center; outline: none;
+        }
+
+        .btn-vintage {
+            background-color: #4a4a4a; color: #f5f5dc; border: 1px solid #f5f5dc;
+            padding: 18px 35px; font-weight: bold; text-transform: uppercase;
+            cursor: pointer; letter-spacing: 3px; transition: 0.4s ease;
+        }
+
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.96); display: none;
+            justify-content: center; align-items: flex-start;
+            z-index: 1000; overflow-y: auto; padding: 40px 0;
+        }
+
+        .tarjeta-base {
+            width: 95%; max-width: 650px; padding: 50px 30px;
+            border-radius: 15px; position: relative;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 1); text-align: center; margin: auto;
+        }
+
+        /* DISEÑOS TARJETAS */
+        .marble-design { background: linear-gradient(135deg, #7c5c3e 0%, #4a341d 40%, #000000 100%); border: 2px solid rgba(255, 255, 255, 0.3); }
+        .storm-design { background: linear-gradient(180deg, #111111 0%, #333333 50%, #555555 100%); border: 1px solid #444; }
+        .special-design-points { background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); border: 4px double #d4af37; outline: 1px solid #d4af37; outline-offset: -12px; }
+        .product-design { background: linear-gradient(135deg, #4d4d4d 0%, #1a1a1a 100%); border: 2px solid #999; }
+
+        /* SELLOS Y BRILLOS */
+        .icono-circulo { width: 42px; height: 42px; border: 2px solid #ffffff; border-radius: 50%; cursor: pointer; transition: 0.4s; flex-shrink: 0; }
+        .icono-circulo.marcado { background: #ffffff !important; box-shadow: 0 0 20px #fff, 0 0 40px #fff !important; display: flex; justify-content: center; align-items: center; }
+        .icono-circulo.marcado::after { content: "✂"; color: #000; font-size: 1.2rem; }
+
+        .icono-base-storm { width: 60px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.4s; flex-shrink: 0; }
+        .icono-base-storm svg { width: 100%; height: 100%; fill: transparent; stroke: #d4af37; stroke-width: 1.5; transition: 0.4s; }
+        .marcado-storm svg { fill: #d4af37 !important; filter: drop-shadow(0 0 15px #d4af37) !important; stroke: #fff !important; }
+
+        .icono-producto { width: 45px; height: 45px; border: 1px dashed #ccc; border-radius: 8px; cursor: pointer; transition: 0.4s; }
+        .icono-producto.marcado-prod { background: #f5f5dc !important; border-style: solid; box-shadow: 0 0 20px #f5f5dc !important; display: flex; justify-content: center; align-items: center; }
+        .icono-producto.marcado-prod::after { content: "✔"; color: #000; font-weight: bold; }
+
+        .contenedor-filas { display: flex; flex-direction: column; gap: 20px; align-items: center; margin: 20px 0; }
+        .fila-promo { display: flex; align-items: center; gap: 15px; width: 100%; justify-content: center; }
+        .grupo-iconos { display: flex; gap: 6px; }
+        .texto-promo { width: 250px; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: #fff; font-weight: bold; }
+        
+        .puntos-display { font-size: 1.4rem; color: #ffffff; background: rgba(212, 175, 55, 0.2); display: inline-block; padding: 10px 25px; border-radius: 50px; border: 1px solid #d4af37; margin-bottom: 10px; }
+        .divisor { width: 80%; height: 1px; background: rgba(212,175,55,0.3); margin: 20px auto; }
+        .info-footer { font-size: 0.75rem; color: #f5f5dc; text-transform: uppercase; letter-spacing: 1px; line-height: 1.6; }
+        .cerrar-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; cursor: pointer; color: #ffffff; }
+        .hidden { display: none; }
+
+        .modal-salida-contenido { background: #1a1a1a; padding: 40px; border: 1px solid #d4af37; text-align: center; border-radius: 10px; width: 85%; max-width: 400px; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-principal">
+        <header>
+            <h1>STYLE STORM</h1>
+            <p class="eslogan">Barber Studio</p>
+        </header>
+
+        <div id="registro">
+            <input type="text" id="nombre" placeholder="NOMBRE">
+            <input type="text" id="apellido" placeholder="APELLIDO">
+            <input type="email" id="correo" placeholder="CORREO (OPCIONAL)">
+            <p style="font-size: 0.7rem; color: #b0b0b0; margin-bottom: 20px;">Recibirás notificaciones de tus promos</p>
+            <button class="btn-vintage" onclick="entrar()">VER PROMOS</button>
+        </div>
+
+        <div id="menu-promos" class="hidden">
+            <p id="saludo" style="margin-bottom: 20px; font-weight: bold; color: #f5f5dc; text-transform: uppercase;"></p>
+            <div class="promo-card" onclick="abrirModal('modal-leal')">TARJETA LEAL</div>
+            <div class="promo-card" onclick="abrirModal('modal-fidelidad')">TARJETA FIDELIDAD</div>
+            <div class="promo-card" onclick="abrirModal('modal-special')" style="border-left-color: #d4af37;">PROMOS ESPECIALES</div>
+            <div class="promo-card" onclick="abrirModal('modal-productos')" style="border-left-color: #999;">TARJETA DE PRODUCTOS</div>
+            <button class="btn-vintage" style="font-size: 0.7rem; margin-top: 15px;" onclick="abrirModal('modal-logout')">CERRAR SESIÓN</button>
+        </div>
+    </div>
+
+    <div id="modal-leal" class="modal">
+        <div class="tarjeta-base marble-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:20px;">TARJETA LEAL</div><div class="contenedor-filas" id="filas-leal"></div><div class="divisor"></div><div id="footer-leal" class="info-footer"></div></div>
+    </div>
+    <div id="modal-fidelidad" class="modal">
+        <div class="tarjeta-base storm-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:20px; color:#d4af37;">TARJETA FIDELIDAD</div><div class="contenedor-filas" id="filas-fidelidad"></div><div class="divisor"></div><div id="footer-fidelidad" class="info-footer"></div></div>
+    </div>
+    <div id="modal-special" class="modal">
+        <div class="tarjeta-base special-design-points"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:10px; color:#d4af37;">PROMOS ESPECIALES</div><div class="puntos-display">TOTAL: 30 PTS</div><p style="color:#d4af37; font-weight:bold;">ACUMULADOS: <span id="puntos-val">0</span></p><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 90%; margin: 20px auto; text-align: left;"><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #666; border-radius: 4px; opacity: 0.7;"><span>CORTE DE CABELLO</span><br><b style="color:#d4af37">VALE 25 PTS</b></div><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(15, 'Traer un Amigo')"><span>TRAER UN AMIGO</span><br><b style="color:#d4af37">+15 PTS</b></div><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(15, 'Visita 15 días')"><span>CADA 15 DÍAS</span><br><b style="color:#d4af37">+15 PTS</b></div><div style="background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid #d4af37; border-radius: 4px; cursor: pointer;" onclick="sumarPuntosEspeciales(20, 'Comprar Productos')"><span>COMPRAR PRODUCTOS</span><br><b style="color:#d4af37">+20 PTS</b></div></div><div style="background:#d4af37; color:#000; padding:10px; font-weight:bold; text-transform:uppercase; font-size:0.75rem;">CORTE A S/1 (MARTES-JUEVES-SÁBADOS) AL LLEGAR A 30 PTS</div><div class="divisor"></div><div id="footer-special" class="info-footer"></div></div>
+    </div>
+    <div id="modal-productos" class="modal">
+        <div class="tarjeta-base product-design"><span class="cerrar-btn" onclick="cerrar()">×</span><div style="font-weight:bold; letter-spacing:3px; margin-bottom:20px;">CLUB DE PRODUCTOS</div><div class="contenedor-filas" id="filas-productos"></div><div style="font-size: 0.75rem; color: #fff; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 6px; margin-top: 15px; border: 1px solid #999;"><b>PROMO CLUB:</b> POR CADA 3 PRODUCTOS EL 4TO AL 50% DSCTO Y EL 5TO A SOLO S/3 C/U</div><div class="divisor"></div><div id="footer-productos" class="info-footer"></div></div>
+    </div>
+
+    <div id="modal-logout" class="modal" style="align-items: center;">
+        <div class="modal-salida-contenido">
+            <h3 style="color:#f5f5dc; margin-bottom:20px;">DÉJANOS TU NÚMERO PARA ENVIARTE TUS PROMOS</h3>
+            <input type="number" id="telefono-promo" placeholder="TU WHATSAPP" style="width: 90%;">
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                <button class="btn-vintage" style="padding: 10px 20px; font-size: 0.7rem; background:#25d366; color:#fff; border-color:#25d366;" onclick="enviarWhatsApp()">ENVIAR</button>
+                <button class="btn-vintage" style="padding: 10px 20px; font-size: 0.7rem; background:transparent; color:#fff;" onclick="finalizarCierre()">MÁS TARDE</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PIN = "storm05.z";
+        const PROMOS = ["50% DESC. CORTES (FADES - DEGRADADOS)", "REGALO DE 1 PRODUCTO PARA EL CABELLO O PIEL", "30% DESCUENTO DE C/U TIPO DE CORTE + PRODUCTO"];
+        const FRASES_LEAL = ["\"Hoy se hace como en tu foto de perfil o mejor\"", "\"El estilo es la única tormenta que no quieres evitar\""];
+        const FRASES_FIDELIDAD = ["\"No es solo un corte, es tu nueva marca personal\"", "\"Donde la precisión se encuentra con la tormenta\""];
+        const CONTACTO = `<p><strong>Dirección:</strong> Av. Manco Cápac 469, Tablada de Lurín</p><p><strong>Contacto:</strong> 963031759 | <strong>Horario:</strong> Mar-Dom 10AM-8PM</p><p style="font-weight:bold; color:#f5f5dc;">Lunes atención con reserva fija</p>`;
+        const SVG_NUBE = `<svg viewBox="0 0 24 24"><path d="M17.5,19c0.4,0,0.8-0.1,1.1-0.3c1.4-0.8,1.9-2.6,1.1-4c-0.1-0.2-0.2-0.3-0.3-0.5C19.7,11,17.4,9,14.5,9c-0.4,0-0.8,0-1.2,0.1 C12.4,7.2,10.3,6,8,6C4.7,6,2,8.7,2,12c0,0.6,0.1,1.2,0.3,1.7c0.6,1.8,2.3,3.1,4.3,3.3l0.4,0h2.5l-1,3h2.5l1.5-4h-2l1-3h-2.5l1.5-4l-1,3" /></svg>`;
+
+        function entrar() {
+            if(!document.getElementById('nombre').value) return alert("Ingresa tu nombre");
+            document.getElementById('registro').classList.add('hidden');
+            document.getElementById('menu-promos').classList.remove('hidden');
+            document.getElementById('saludo').innerText = "HOLA, " + document.getElementById('nombre').value;
+            renderTodo();
+        }
+
+        function renderTodo() {
+            const leal = document.getElementById('filas-leal');
+            const fidelidad = document.getElementById('filas-fidelidad');
+            const productos = document.getElementById('filas-productos');
+            leal.innerHTML = fidelidad.innerHTML = "";
+            PROMOS.forEach((texto, i) => {
+                let iconsL = "", iconsF = "";
+                for(let j=0; j<4; j++) {
+                    let idL = `l-${i}-${j}`, idF = `f-${i}-${j}`;
+                    iconsL += `<div class="icono-circulo ${localStorage.getItem(idL)==='true'?'marcado':''}" onclick="marcarSello('${idL}',this,'marcado')"></div>`;
+                    iconsF += `<div class="icono-base-storm ${localStorage.getItem(idF)==='true'?'marcado-storm':''}" onclick="marcarSello('${idF}',this,'marcado-storm')">${SVG_NUBE}</div>`;
+                }
+                leal.innerHTML += `<div class="fila-promo"><div class="grupo-iconos">${iconsL}</div><div class="texto-promo">${texto}</div></div>`;
+                fidelidad.innerHTML += `<div class="fila-promo"><div class="grupo-iconos">${iconsF}</div><div class="texto-promo">${texto}</div></div>`;
+            });
+            let iconsP = "";
+            for(let k=0; k<5; k++) {
+                let idPr = `prod-${k}`;
+                iconsP += `<div class="icono-producto ${localStorage.getItem(idPr)==='true'?'marcado-prod':''}" onclick="marcarSello('${idPr}',this,'marcado-prod')"></div>`;
+            }
+            productos.innerHTML = `<div class="fila-promo"><div class="grupo-iconos">${iconsP}</div><div class="texto-promo">Lealtad en Productos</div></div>`;
+            document.getElementById('footer-leal').innerHTML = FRASES_LEAL.map(f => `<div class="frase-item">${f}</div>`).join('') + CONTACTO;
+            document.getElementById('footer-fidelidad').innerHTML = FRASES_FIDELIDAD.map(f => `<div class="frase-item">${f}</div>`).join('') + CONTACTO;
+            document.getElementById('footer-special').innerHTML = CONTACTO;
+            document.getElementById('footer-productos').innerHTML = CONTACTO;
+            actualizarDisplayPuntos();
+        }
+
+        function marcarSello(id, el, cl) {
+            if(prompt("PIN ADMIN:") === PIN) {
+                const val = !el.classList.contains(cl);
+                if(val) el.classList.add(cl); else el.classList.remove(cl);
+                localStorage.setItem(id, val);
+            }
+        }
+
+        function sumarPuntosEspeciales(cant, motivo) {
+            if(prompt(`Validar ${motivo}. PIN ADMIN:`) === PIN) {
+                let p = parseInt(localStorage.getItem('puntos_storm_acum') || 0) + cant;
+                localStorage.setItem('puntos_storm_acum', p);
+                actualizarDisplayPuntos();
+            }
+        }
+
+        function actualizarDisplayPuntos() { document.getElementById('puntos-val').innerText = localStorage.getItem('puntos_storm_acum') || 0; }
+        function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function cerrar() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+        
+        // CORRECCIÓN: Función para regresar al inicio (Registro)
+        function finalizarCierre() { 
+            cerrar(); // Cierra el modal
+            document.getElementById('menu-promos').classList.add('hidden'); // Oculta el menú
+            document.getElementById('registro').classList.remove('hidden'); // Muestra el registro (Inicio)
+            // Opcional: Limpiar los campos para un nuevo usuario
+            document.getElementById('nombre').value = "";
+            document.getElementById('apellido').value = "";
+            document.getElementById('correo').value = "";
+            document.getElementById('telefono-promo').value = "";
+        }
+
+        function enviarWhatsApp() {
+            const numCliente = document.getElementById('telefono-promo').value;
+            if(!numCliente) return alert("Por favor ingresa un número.");
+            const mensaje = encodeURIComponent(`Hola Alessandro storm, aquí dejo mi número para recibir promociones: ${numCliente}`);
+            window.open(`https://wa.me/51963031759?text=${mensaje}`, '_blank');
+            finalizarCierre();
+        }
+    </script>
+</body>
+</html>
